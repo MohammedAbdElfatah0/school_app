@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widget/custom_app_bar.dart';
+import '../widget/header_text.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -9,9 +10,13 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomAppBarAuth(title: "Login",),
-          // Add your login form here
+          
+          HeaderText(title :"Email"),
+          
+          HeaderText(title :"Password"),
         ],
       ),
     );
