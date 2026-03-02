@@ -1,4 +1,6 @@
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+
+import 'feature/auth/presentation/view/auth_screen.dart';
 
 class SchoolApp extends StatelessWidget {
   const SchoolApp({super.key});
@@ -10,11 +12,7 @@ class SchoolApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
-      home: const Scaffold(
-        body: Center(
-          child: Text('Welcome to the School App!'),
-        ),
-      ),
+      home: AuthScreen(),
     );
   }
 }
