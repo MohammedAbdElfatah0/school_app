@@ -1,5 +1,5 @@
 class Routes {
-  static String loginRoute = '/login';
-  static String signUpRoute = '/signUp';
-  static String homeRoute = '/home';
+  static const String loginRoute = '/login';
+  static const String signUpRoute = '/signUp';
+  static const String homeRoute = '/home';
 }

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:school_app/core/routes/routes.dart';
+
+import '../../feature/auth/presentation/view/login_screen.dart';
 
 class AppRoutes {
   Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      // Define your routes here
-      // case Routes.home:
-      //   return MaterialPageRoute(builder: (_) => HomeScreen());
+      case Routes.loginRoute:
+        return MaterialPageRoute(builder: (_) => const LoginScreen());
+      case Routes.signUpRoute:
+        return MaterialPageRoute(builder: (_) => const LoginScreen());
       default:
         return MaterialPageRoute(
           builder:
