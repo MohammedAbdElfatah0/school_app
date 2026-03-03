@@ -6,7 +6,7 @@ class CustomTextFormField extends StatefulWidget {
     super.key,
     required this.hintText,
     required this.controller,
-    required this.validator,
+    this.validator,
     this.isPassword = false,
     this.prefix,
   });
@@ -47,8 +47,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                 ? IconButton(
                   icon: Icon(
                     _obscureText ? Icons.visibility : Icons.visibility_off,
-                  color: ColorManager.primaryColor.withAlpha(100),),
-                  
+                    color: ColorManager.primaryColor.withAlpha(100),
+                  ),
+
                   onPressed: () {
                     setState(() {
                       _obscureText = !_obscureText;
