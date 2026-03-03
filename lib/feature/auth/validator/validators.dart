@@ -20,6 +20,12 @@ class Validators {
 
     return null;
   }
+  static String? fullName(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Full name is required';
+    }
+    return null;
+  }
 
   static String? password(String? value) {
     if (value == null || value.length < 6) {
