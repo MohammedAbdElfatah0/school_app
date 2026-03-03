@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'feature/auth/presentation/view/auth_screen.dart';
+import 'package:school_app/core/routes/app_routes.dart';
+import 'package:school_app/core/routes/routes.dart';
 
 class SchoolApp extends StatelessWidget {
   const SchoolApp({super.key});
@@ -12,7 +12,8 @@ class SchoolApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
-      home: AuthScreen(),
+      onGenerateRoute: AppRoutes().generateRoute,
+      initialRoute: Routes.loginRoute,
     );
   }
 }
