@@ -10,25 +10,15 @@ class DiviederContinue extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(
-          child: Divider(
-            color: Colors.black,
-            thickness: 1,
-
-            endIndent: 5,
-          ),
+        const Expanded(
+          child: Divider(color: Colors.black, thickness: 1, endIndent: 5),
         ),
         Text(
           'or continue with',
           style: TextStyleApp.s16w700.copyWith(color: ColorManager.blackColor),
         ),
-        Expanded(
-          child: Divider(
-            color: Colors.black,
-            thickness: 1,
-            indent: 5,
-
-          ),
+        const Expanded(
+          child: Divider(color: Colors.black, thickness: 1, indent: 5),
         ),
       ],
     );
