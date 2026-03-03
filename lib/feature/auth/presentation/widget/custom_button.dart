@@ -3,9 +3,9 @@ import 'package:school_app/core/constants/color_manager.dart';
 import 'package:school_app/core/theme/text_style.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.title, this.onPressed});
+  const CustomButton({super.key, required this.title, required this.onPressed});
   final String title;
-  final VoidCallback? onPressed;
+  final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
     return SizedBox(

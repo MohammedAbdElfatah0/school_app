@@ -14,7 +14,7 @@ class DiviederContinue extends StatelessWidget {
           child: Divider(
             color: Colors.black,
             thickness: 1,
-            indent: 32,
+
             endIndent: 5,
           ),
         ),
@@ -27,7 +27,7 @@ class DiviederContinue extends StatelessWidget {
             color: Colors.black,
             thickness: 1,
             indent: 5,
-            endIndent: 32,
+
           ),
         ),
       ],
