@@ -70,6 +70,10 @@ Widget _buildLoginForm({
         CustomTextFormField(
           controller: emailController,
           hintText: "enter your email",
+          prefix:   Icon(
+            Icons.email_outlined,
+            color: ColorManager.primaryColor.withAlpha(100),
+          ),
           validator: Validators.email,
         ),
         const SizedBox(height: 16),
@@ -78,6 +82,10 @@ Widget _buildLoginForm({
         CustomTextFormField(
           controller: passwordController,
           hintText: "enter your password",
+          prefix: Icon(
+            Icons.lock_outline,
+            color: ColorManager.primaryColor.withAlpha(100),
+          ),
           validator: Validators.password,
           isPassword: true,
         ),
