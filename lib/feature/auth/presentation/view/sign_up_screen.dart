@@ -3,7 +3,6 @@ import 'package:school_app/core/constants/color_manager.dart';
 import 'package:school_app/core/theme/text_style.dart';
 import 'package:school_app/feature/auth/validator/validators.dart';
 
-import '../../../../core/routes/routes.dart';
 import '../../../../core/widget/custom_text_form_field.dart';
 import '../widget/custom_app_bar.dart';
 import '../widget/custom_button.dart';
@@ -11,16 +10,16 @@ import '../widget/socail_auth_buttons.dart';
 import '../widget/divieder_contnue.dart';
 import '../widget/header_text.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final emailController = TextEditingController();
-
+  final fullNameController = TextEditingController();
   final passwordController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
@@ -40,11 +39,12 @@ class _LoginScreenState extends State<LoginScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              const CustomAppBarAuth(title: "Login"),
+              const CustomAppBarAuth(title: "Sign Up"),
               Form(
                 key: formKey,
-                child: _buildLoginForm(
+                child: _buildSignUpForm(
                   context: context,
+                  fullNameController: fullNameController,
                   emailController: emailController,
                   passwordController: passwordController,
                 ),
@@ -58,8 +58,9 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-Widget _buildLoginForm({
+Widget _buildSignUpForm({
   required BuildContext context,
+  required TextEditingController fullNameController,
   required TextEditingController emailController,
   required TextEditingController passwordController,
 }) {
@@ -68,6 +69,18 @@ Widget _buildLoginForm({
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const HeaderText(title: 'Full Name'),
+        const SizedBox(height: 8),
+        CustomTextFormField(
+          controller: fullNameController,
+          hintText: "enter your full name",
+          prefix: Icon(
+            Icons.person_outline,
+            color: ColorManager.primaryColor.withAlpha(100),
+          ),
+          validator: Validators.fullName,
+        ),
+        const SizedBox(height: 16),
         const HeaderText(title: 'Email'),
         const SizedBox(height: 8),
         CustomTextFormField(
@@ -93,16 +106,7 @@ Widget _buildLoginForm({
           isPassword: true,
         ),
 
-        const SizedBox(height: 20),
-        Align(
-          alignment: Alignment.topRight,
-          child: Text(
-            'forgot password?',
-            style: TextStyleApp.s14w500.copyWith(
-              color: ColorManager.greyColor500,
-            ),
-          ),
-        ),
+        
         const SizedBox(height: 30),
         CustomButton(title: 'Login', onPressed: () {}),
         const SizedBox(height: 20),
@@ -121,10 +125,10 @@ Widget _buildLoginForm({
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, Routes.signUpRoute);
+                Navigator.pop(context);
               },
               child: Text(
-                'Sign Up',
+                'Login',
                 style: TextStyleApp.s14w500.copyWith(
                   color: ColorManager.primaryColor,
                 ),
