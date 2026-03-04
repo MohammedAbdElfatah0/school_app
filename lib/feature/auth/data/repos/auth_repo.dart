@@ -1,10 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../../core/networks/supabase_service.dart';
 
-class AuthRepo {
-  final _client = SupabaseService.instance.client;
+  class AuthRepo {
+  AuthRepo(this._client);
+
+  final SupabaseClient _client;
 
   //sign up
   Future<Either<String, void>> signUp({
@@ -18,23 +19,19 @@ class AuthRepo {
         password: password,
       );
 
-      //in database we have a table called profiles
-      //and in that table we have a column called id and full_name
-      //so when the user sign up
-      //we will insert the user id and full name in the profiles table
       final userId = response.user?.id;
 
-      if (userId != null) {
-        await _client.from('profiles').insert({
-          'id': userId,
-          'full_name': fullName,
-        });
+      if (userId == null) {
+        return const Left("User creation failed");
       }
-      return const Right(null);
+
+      final result = await savingUserData(userId, fullName, email);
+
+      return result;
     } on AuthException catch (e) {
-      return Left(e.toString());
+      return Left(e.message);
     } catch (e) {
-      return Left(e.toString());
+      return const Left("Unexpected error occurred");
     }
   }
 
@@ -48,6 +45,23 @@ class AuthRepo {
       return const Right(null);
     } on AuthException catch (e) {
       return Left(e.toString());
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  Future<Either<String, void>> savingUserData(
+    String userId,
+    String fullName,
+    String email,
+  ) async {
+    try {
+      await _client.from('profiles').insert({
+        'id': userId,
+        'full_name': fullName,
+        'email': email,
+      });
+      return const Right(null);
     } catch (e) {
       return Left(e.toString());
     }
