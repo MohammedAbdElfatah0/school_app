@@ -11,15 +11,12 @@ class Validators {
       return 'Email is required';
     }
 
-    final emailRegex =
-        RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-
-    if (!emailRegex.hasMatch(value)) {
-      return 'Enter a valid email';
+    if (!value.contains('@')) {
+      return 'Invalid email format';
     }
-
     return null;
   }
+
   static String? fullName(String? value) {
     if (value == null || value.trim().isEmpty) {
       return 'Full name is required';
