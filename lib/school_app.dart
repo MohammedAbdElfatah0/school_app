@@ -13,7 +13,7 @@ class SchoolApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
       onGenerateRoute: AppRoutes().generateRoute,
-      initialRoute: Routes.loginRoute,
+      initialRoute: Routes.authRoute,
     );
   }
 }
