@@ -1,8 +1,9 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-
-  class AuthRepo {
+class AuthRepo {
   AuthRepo(this._client);
 
   final SupabaseClient _client;
@@ -14,6 +15,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
     required String fullName,
   }) async {
     try {
+      log('Signing up with email: $email');
       final response = await _client.auth.signUp(
         email: email,
         password: password,
@@ -25,12 +27,15 @@ import 'package:supabase_flutter/supabase_flutter.dart';
         return const Left("User creation failed");
       }
 
+      log('User created with ID: $userId');
       final result = await savingUserData(userId, fullName, email);
-
+      log('Result: $result');
       return result;
     } on AuthException catch (e) {
+      log(e.toString());
       return Left(e.message);
     } catch (e) {
+      log(e.toString());
       return const Left("Unexpected error occurred");
     }
   }
@@ -44,9 +49,9 @@ import 'package:supabase_flutter/supabase_flutter.dart';
       await _client.auth.signInWithPassword(email: email, password: password);
       return const Right(null);
     } on AuthException catch (e) {
-      return Left(e.toString());
+      return Left('sss=>${e.toString()}');
     } catch (e) {
-      return Left(e.toString());
+      return Left('sss0=>${e.toString()}');
     }
   }
 
@@ -61,8 +66,10 @@ import 'package:supabase_flutter/supabase_flutter.dart';
         'full_name': fullName,
         'email': email,
       });
+      log('User data saved successfully');
       return const Right(null);
     } catch (e) {
+      log('Error saving user data: $e');
       return Left(e.toString());
     }
   }
