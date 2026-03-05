@@ -7,15 +7,13 @@ import 'package:school_app/core/theme/text_style.dart';
 import 'package:school_app/feature/auth/presentation/cubit/signup/sign_up_cubit.dart';
 import 'package:school_app/feature/auth/validator/validators.dart';
 
-import '../../../../core/networks/supabase_service.dart';
 import '../../../../core/widget/custom_text_form_field.dart';
 import '../../../../core/widget/snack_bar.dart';
-import '../../data/repos/auth_repo.dart';
 import '../widget/custom_app_bar.dart';
 import '../widget/custom_button.dart';
-import '../widget/socail_auth_buttons.dart';
 import '../widget/divieder_contnue.dart';
 import '../widget/header_text.dart';
+import '../widget/socail_auth_buttons.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -40,44 +38,39 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<SignUpCubit>(
-      create: (BuildContext context) {
-        return SignUpCubit(AuthRepo(SupabaseService.instance.client));
-      },
-      child: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Scaffold(
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                const CustomAppBarAuth(title: "Sign Up"),
-                Form(
-                  key: formKey,
-                  child: _buildSignUpForm(
-                    context: context,
-                    fullNameController: fullNameController,
-                    emailController: emailController,
-                    passwordController: passwordController,
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        BlocProvider.of<SignUpCubit>(context).signUp(
-                          fullName: fullNameController.text,
-                          email: emailController.text,
-                          password: passwordController.text,
-                        );
-                      } else {
-                        SnackBarMessage().show(
-                          context,
-                          message: "Please fill all fields correctly",
-                          color: ColorManager.errorColor,
-                        );
-                      }
-                    },
-                  ),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const CustomAppBarAuth(title: "Sign Up"),
+              Form(
+                key: formKey,
+                child: _buildSignUpForm(
+                  context: context,
+                  fullNameController: fullNameController,
+                  emailController: emailController,
+                  passwordController: passwordController,
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      BlocProvider.of<SignUpCubit>(context).signUp(
+                        fullName: fullNameController.text,
+                        email: emailController.text,
+                        password: passwordController.text,
+                      );
+                    } else {
+                      SnackBarMessage().show(
+                        context,
+                        message: "Please fill all fields correctly",
+                        color: ColorManager.errorColor,
+                      );
+                    }
+                  },
                 ),
-                const SizedBox(height: 16),
-              ],
-            ),
+              ),
+              const SizedBox(height: 16),
+            ],
           ),
         ),
       ),
@@ -152,9 +145,11 @@ Widget _buildSignUpForm({
           },
           builder: (context, state) {
             return state is SignUpLoadingState
-                ? const CircularProgressIndicator(
-                  color: ColorManager.primaryColor,
-                  backgroundColor: ColorManager.secondaryColor,
+                ? const Center(
+                  child: CircularProgressIndicator(
+                    color: ColorManager.primaryColor,
+                    backgroundColor: ColorManager.secondaryColor,
+                  ),
                 )
                 : CustomButton(title: 'Sign Up', onPressed: onPressed);
           },

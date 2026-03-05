@@ -4,19 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_app/core/constants/color_manager.dart';
 import 'package:school_app/core/theme/text_style.dart';
-import 'package:school_app/feature/auth/data/repos/auth_repo.dart';
 import 'package:school_app/feature/auth/presentation/cubit/login/login_cubit.dart';
 import 'package:school_app/feature/auth/validator/validators.dart';
 
-import '../../../../core/networks/supabase_service.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/widget/custom_text_form_field.dart';
 import '../../../../core/widget/snack_bar.dart';
 import '../widget/custom_app_bar.dart';
 import '../widget/custom_button.dart';
-import '../widget/socail_auth_buttons.dart';
 import '../widget/divieder_contnue.dart';
 import '../widget/header_text.dart';
+import '../widget/socail_auth_buttons.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -41,40 +39,37 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<LoginCubit>(
-      create: (context) => LoginCubit(AuthRepo(SupabaseService.instance.client)),
-      child: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Scaffold(
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                const CustomAppBarAuth(title: "Login"),
-                Form(
-                  key: formKey,
-                  child: _buildLoginForm(
-                    context: context,
-                    emailController: emailController,
-                    passwordController: passwordController,
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        BlocProvider.of<LoginCubit>(context).login(
-                          email: emailController.text,
-                          password: passwordController.text,
-                        );
-                      } else {
-                        SnackBarMessage().show(
-                          context,
-                          message: "Please fill all fields correctly",
-                          color: ColorManager.errorColor,
-                        );
-                      }
-                    },
-                  ),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const CustomAppBarAuth(title: "Login"),
+              Form(
+                key: formKey,
+                child: _buildLoginForm(
+                  context: context,
+                  emailController: emailController,
+                  passwordController: passwordController,
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      BlocProvider.of<LoginCubit>(context).login(
+                        email: emailController.text,
+                        password: passwordController.text,
+                      );
+                    } else {
+                      SnackBarMessage().show(
+                        context,
+                        message: "Please fill all fields correctly",
+                        color: ColorManager.errorColor,
+                      );
+                    }
+                  },
                 ),
-                const SizedBox(height: 16),
-              ],
-            ),
+              ),
+              const SizedBox(height: 16),
+            ],
           ),
         ),
       ),
@@ -146,9 +141,11 @@ Widget _buildLoginForm({
           },
           builder: (context, state) {
             return state is LoginLoadingState
-                ? const CircularProgressIndicator(
-                  color: ColorManager.primaryColor,
-                  backgroundColor: ColorManager.secondaryColor,
+                ? const Center(
+                  child: CircularProgressIndicator(
+                    color: ColorManager.primaryColor,
+                    backgroundColor: ColorManager.secondaryColor,
+                  ),
                 )
                 : CustomButton(title: 'Login', onPressed: onPressed);
           },
