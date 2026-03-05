@@ -127,8 +127,7 @@ Widget _buildLoginForm({
         BlocConsumer<LoginCubit, LoginStatus>(
           listener: (context, state) {
             if (state is LoginSuccessState) {
-              log("success login");
-              //TODO Navigator.pushReplacementNamed(context, Routes.homeRoute);
+              Navigator.pushReplacementNamed(context, Routes.layout);
             }
 
             if (state is LoginFailureState) {
