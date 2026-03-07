@@ -7,6 +7,10 @@ class HeaderHome extends StatelessWidget {
   final String name;
   @override
   Widget build(BuildContext context) {
+    var outlineInputBorder = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: const BorderSide(color: ColorManager.whiteColor, width: 2),
+    );
     return Container(
       decoration: const BoxDecoration(color: ColorManager.primaryColor),
       child: Padding(
@@ -30,16 +34,15 @@ class HeaderHome extends StatelessWidget {
             TextField(
               style: const TextStyle(color: ColorManager.blackColor),
               decoration: InputDecoration(
-                hintText: 'Search',
+                prefixIcon: const Icon(
+                  Icons.search,
+                  color: ColorManager.greyColor500,
+                ),
+                hintText: 'What are you looking for?',
                 filled: true,
                 fillColor: ColorManager.whiteColor,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                    color: ColorManager.whiteColor,
-                    width: 2,
-                  ),
-                ),
+                enabledBorder: outlineInputBorder,
+                focusedBorder: outlineInputBorder,
               ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.005),
