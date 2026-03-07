@@ -9,6 +9,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../feature/auth/presentation/view/login_screen.dart';
 import '../../feature/auth/presentation/view/sign_up_screen.dart';
+import '../../feature/home/data/model/courses_model.dart';
+import '../../feature/home/presentation/view/courses_details.dart';
 
 class AppRoutes {
   Route generateRoute(RouteSettings settings) {
@@ -18,10 +20,7 @@ class AppRoutes {
       case Routes.layout:
         return MaterialPageRoute(builder: (_) => const LayoutScreen());
       case Routes.loginRoute:
-        return MaterialPageRoute(
-          builder:
-              (_) => const LoginScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => const LoginScreen());
       case Routes.signUpRoute:
         return MaterialPageRoute(
           builder:
@@ -29,6 +28,11 @@ class AppRoutes {
                 create: (_) => SignUpCubit(AuthRepo(Supabase.instance.client)),
                 child: const SignUpScreen(),
               ),
+        );
+      case Routes.detailsCourses:
+        final course = settings.arguments as CoursesModel;
+        return MaterialPageRoute(
+          builder: (_) => CoursesDetailsScreen(course: course),
         );
       default:
         return MaterialPageRoute(
