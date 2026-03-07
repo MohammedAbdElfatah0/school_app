@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/color_manager.dart';
+import '../../../../core/routes/routes.dart';
 import '../../../../core/theme/text_style.dart';
 import '../../../../core/widget/custom_loadint_widget.dart';
 import '../../data/model/courses_model.dart';
@@ -34,13 +35,16 @@ class BuildCoursesGrid extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: CachedNetworkImage(
-                      imageUrl: courses[index].imageUrl,
-                      fit: BoxFit.cover,
-                      errorWidget:
-                          (context, url, error) => const Icon(Icons.error),
-                      placeholder:
-                          (context, url) => const CustomLoadingWidget(),
+                    child: Hero(
+                      tag: courses[index].id,
+                      child: CachedNetworkImage(
+                        imageUrl: courses[index].imageUrl,
+                        fit: BoxFit.cover,
+                        errorWidget:
+                            (context, url, error) => const Icon(Icons.error),
+                        placeholder:
+                            (context, url) => const CustomLoadingWidget(),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -64,7 +68,14 @@ class BuildCoursesGrid extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.sizeOf(context).width * 0.4,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        //navaigtor to details screen
+                        Navigator.pushNamed(
+                          context,
+                          Routes.detailsCourses,
+                          arguments: courses[index],
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: ColorManager.primaryColor,
                       ),
