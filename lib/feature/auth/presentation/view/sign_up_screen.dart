@@ -7,6 +7,8 @@ import 'package:school_app/core/theme/text_style.dart';
 import 'package:school_app/feature/auth/presentation/cubit/signup/sign_up_cubit.dart';
 import 'package:school_app/feature/auth/validator/validators.dart';
 
+import '../../../../core/widget/custom_loadint_widget.dart'
+    show CustomLoadingWidget;
 import '../../../../core/widget/custom_text_form_field.dart';
 import '../../../../core/widget/snack_bar.dart';
 import '../widget/custom_app_bar.dart';
@@ -145,12 +147,7 @@ Widget _buildSignUpForm({
           },
           builder: (context, state) {
             return state is SignUpLoadingState
-                ? const Center(
-                  child: CircularProgressIndicator(
-                    color: ColorManager.primaryColor,
-                    backgroundColor: ColorManager.secondaryColor,
-                  ),
-                )
+                ? const CustomLoadingWidget()
                 : CustomButton(title: 'Sign Up', onPressed: onPressed);
           },
         ),

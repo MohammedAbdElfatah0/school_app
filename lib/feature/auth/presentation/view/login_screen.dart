@@ -6,6 +6,7 @@ import 'package:school_app/feature/auth/presentation/cubit/login/login_cubit.dar
 import 'package:school_app/feature/auth/validator/validators.dart';
 
 import '../../../../core/routes/routes.dart';
+import '../../../../core/widget/custom_loadint_widget.dart';
 import '../../../../core/widget/custom_text_form_field.dart';
 import '../../../../core/widget/snack_bar.dart';
 import '../widget/custom_app_bar.dart';
@@ -138,12 +139,7 @@ Widget _buildLoginForm({
           },
           builder: (context, state) {
             return state is LoginLoadingState
-                ? const Center(
-                  child: CircularProgressIndicator(
-                    color: ColorManager.primaryColor,
-                    backgroundColor: ColorManager.secondaryColor,
-                  ),
-                )
+                ? const CustomLoadingWidget()
                 : CustomButton(title: 'Login', onPressed: onPressed);
           },
         ),
