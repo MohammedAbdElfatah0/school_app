@@ -17,8 +17,14 @@ class CoursesDetailsScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            onPressed: () => Navigator.pop(context),
+          ),
+          centerTitle: true,
           title: Text(
             'Course Details',
+
             style: TextStyleApp.s20w700.copyWith(
               color: ColorManager.primaryColor,
             ),
