@@ -12,7 +12,7 @@ import '../../../../core/widget/custom_loadint_widget.dart'
 import '../../../../core/widget/custom_text_form_field.dart';
 import '../../../../core/widget/snack_bar.dart';
 import '../widget/custom_app_bar.dart';
-import '../widget/custom_button.dart';
+import '../../../../core/widget/custom_button.dart';
 import '../widget/divieder_contnue.dart';
 import '../widget/header_text.dart';
 import '../widget/socail_auth_buttons.dart';

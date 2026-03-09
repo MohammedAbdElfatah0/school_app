@@ -10,7 +10,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../feature/auth/presentation/view/login_screen.dart';
 import '../../feature/auth/presentation/view/sign_up_screen.dart';
 import '../../feature/home/data/model/courses_model.dart';
-import '../../feature/home/presentation/view/courses_details.dart';
+import '../../feature/courses_details/presentation/view/courses_details.dart';
 
 class AppRoutes {
   Route generateRoute(RouteSettings settings) {
