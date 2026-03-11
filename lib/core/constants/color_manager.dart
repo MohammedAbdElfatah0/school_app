@@ -11,4 +11,5 @@ class ColorManager {
   static const Color greyColor500 = Color.fromARGB(255, 163, 161, 161);
   static const Color greyColor = Color.fromARGB(255, 217, 214, 214);
   static const Color errorColor = Color(0xFFFF0000);
+  static const Color warningColor = Color(0xFFFFA500);
 }
