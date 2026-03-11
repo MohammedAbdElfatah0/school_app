@@ -5,4 +5,6 @@ class Routes {
   static const String layout = '/layout';
   static const String homeRoute = '/home';
   static const String detailsCourses = '/detailsCourses';
+  static const String videos = '/videos';
+  static const String videoPlayer = '/videoPlayer';
 }

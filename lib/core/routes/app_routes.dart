@@ -11,6 +11,9 @@ import '../../feature/auth/presentation/view/login_screen.dart';
 import '../../feature/auth/presentation/view/sign_up_screen.dart';
 import '../../feature/home/data/model/courses_model.dart';
 import '../../feature/courses_details/presentation/view/courses_details.dart';
+import '../../feature/videos/data/model/video_model.dart';
+import '../../feature/videos/presentation/view/play_video.dart';
+import '../../feature/videos/presentation/view/videos_screen.dart';
 
 class AppRoutes {
   Route generateRoute(RouteSettings settings) {
@@ -33,6 +36,17 @@ class AppRoutes {
         final course = settings.arguments as CoursesModel;
         return MaterialPageRoute(
           builder: (_) => CoursesDetailsScreen(course: course),
+        );
+      case Routes.videos:
+        return MaterialPageRoute(
+          builder: (_) => const VideosScreen(),
+          settings: settings,
+        );
+      case Routes.videoPlayer:
+        final video = settings.arguments as VideoModel;
+        return MaterialPageRoute(
+          builder: (_) => PlayVideo(video: video),
+          settings: settings,
         );
       default:
         return MaterialPageRoute(
