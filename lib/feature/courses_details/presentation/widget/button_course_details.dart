@@ -48,6 +48,14 @@ class ButtonCourseDetails extends StatelessWidget {
                         ? 'Enrolled'
                         : 'Enroll Course',
                 onPressed: () {
+                  if (state is AleadyEnrolledState) {
+                    SnackBarMessage().show(
+                      context,
+                      message: 'You are already enrolled in this course',
+                      color: ColorManager.warningColor,
+                    );
+                  }
+
                   if (state is NotEnrolledState ||
                       state is CourseDetailsInitial ||
                       state is CourseDetailsError) {
