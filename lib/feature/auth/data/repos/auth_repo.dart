@@ -55,6 +55,18 @@ class AuthRepo {
     }
   }
 
+  //sign out
+  Future<Either<String, void>> signOut() async {
+    try {
+      await _client.auth.signOut();
+      return const Right(null);
+    } on AuthException catch (e) {
+      return Left(e.message);
+    } catch (e) {
+      return Left('Unexpected error occurred during logout');
+    }
+  }
+
   Future<Either<String, void>> savingUserData(
     String userId,
     String fullName,
